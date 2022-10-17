@@ -9,7 +9,11 @@ function scoreUpdate(win, lose) {
     lostScore += lose;
     scoreWonText.textContent = `Won: ${wonScore}`;
     scoreLostText.textContent = `Lost: ${lostScore}`;
+    player.y = 400;
+    player.x = 200;
 }
+
+
 
 // Enemies our player must avoid
 var Enemy = function(x, y, speed) {
@@ -47,10 +51,7 @@ Enemy.prototype.update = function(dt) {
         ){
             // no collision
         } else {
-            player.x = 200;
-            player.y = 400;
             scoreUpdate(0, 1);
-            console.log('collision!')
         }
 };
 
@@ -82,29 +83,19 @@ Player.prototype.render = function() {
 }
 
 Player.prototype.handleInput = function(keyCode) {
-    if (keyCode === 'up') {
+    if (keyCode === 'up' && this.y > 0) {
         this.y -= 84; 
     }
-    if (keyCode === 'down') {
+    if (keyCode === 'down' && this.y < 400) {
         this.y += 84; 
     }
-    if (keyCode === 'left') {
+    if (keyCode === 'left' && this.x > 0) {
         this.x -= 100; 
     }
-    if (keyCode === 'right') {
+    if (keyCode === 'right' && this.x < 400) {
         this.x += 100; 
     }
-    if (this.x > 400) {
-        this.x = 400
-    }
-    if (this.x < 0) {
-        this.x = 0
-    }
-    if (this.y > 400) {
-        this.y = 400
-    }
     if (this.y < -19) {
-        this.y = 400
         scoreUpdate(1, 0);
     }
 }
