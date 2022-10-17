@@ -9,6 +9,11 @@ var Enemy = function(x, y, speed) {
     this.x = x;
     this.y = y;
     this.speed = speed;
+    this.width = 96;
+    this.height = 68;
+    // actual enemy image X/Y-coordinates start (for more precise collision)
+    this.topLeftX = 3;
+    this.topLeftY = 77;
 };
 
 // Update the enemy's position, required method for game
@@ -21,6 +26,17 @@ Enemy.prototype.update = function(dt) {
     if (this.x > 500) {
         this.x = -90
     }
+    if (this.x + this.topLeftX > player.x + player.topLeftX + player.width ||
+        this.x + this.topLeftX + this.width < player.x + player.topLeftX ||
+        this.y + this.topLeftY > player.y + player.topLeftY + player.height ||
+        this.y + this.topLeftY + this.height < player.y + player.topLeftY
+        ){
+            // no collision
+        } else {
+            player.x = 200;
+            player.y = 400;
+            console.log('collision!')
+        }
 };
 
 // Draw the enemy on the screen, required method for game
@@ -35,6 +51,12 @@ const Player = function(x, y) {
     this.sprite = 'images/char-boy.png';
     this.x = x;
     this.y = y;
+    this.width = 68;
+    this.height = 76;
+    // actual player image X/Y-coordinates start (for more precise collision)
+    this.topLeftX = 17;
+    this.topLeftY = 63;
+    
 }
 
 Player.prototype.update = function() {
@@ -75,9 +97,11 @@ Player.prototype.handleInput = function(keyCode) {
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
-const enemy1 = new Enemy(-90, 60, 100);
+const enemy1 = new Enemy(-90, 60, 10);
+const enemy2 = new Enemy(175, 140, 0);
 const allEnemies = [
-    enemy1
+    enemy1,
+    enemy2
 ];
 
 const player = new Player(200, 400);
@@ -94,3 +118,5 @@ document.addEventListener('keyup', function(e) {
 
     player.handleInput(allowedKeys[e.keyCode]);
 });
+
+const coord = document.getElementsByClassName('coord');
