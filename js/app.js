@@ -36,8 +36,9 @@ Enemy.prototype.update = function(dt) {
     // which will ensure the game runs at the same speed for
     // all computers.
     this.x += this.speed * dt;
-    if (this.x > 500) {
-        this.x = -90
+    if (this.x > 530) {
+        this.x = -130
+        this.speed = 150 + Math.floor(Math.random() * 200);
     }
     if (this.x + this.topLeftX > player.x + player.topLeftX + player.width ||
         this.x + this.topLeftX + this.width < player.x + player.topLeftX ||
@@ -111,9 +112,9 @@ Player.prototype.handleInput = function(keyCode) {
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
-const enemy1 = new Enemy(-90, 60, 700);
-const enemy2 = new Enemy(-90, 140, 120);
-const enemy3 = new Enemy(-90, 220, 120);
+const enemy1 = new Enemy(-90, 60, 150);
+const enemy2 = new Enemy(-90, 140, 250);
+const enemy3 = new Enemy(-90, 220, 200);
 const allEnemies = [
     enemy1,
     enemy2,
