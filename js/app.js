@@ -45,8 +45,19 @@ Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 }
 
-Player.prototype.handleInput = function() {
-
+Player.prototype.handleInput = function(keyCode) {
+    if (keyCode === 'up') {
+        this.y -= 84; 
+    }
+    if (keyCode === 'down') {
+        this.y += 84; 
+    }
+    if (keyCode === 'left') {
+        this.x -= 100; 
+    }
+    if (keyCode === 'right') {
+        this.x += 100; 
+    }
 }
 
 // Now instantiate your objects.
@@ -57,7 +68,7 @@ const allEnemies = [
     enemy1
 ];
 
-const player = new Player(200, 420);
+const player = new Player(200, 400);
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
