@@ -1,3 +1,18 @@
 body {
     text-align: center;
 }
+
+.score {
+    font-size: 24px;
+    margin-bottom: 0;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif
+}
+
+.score__won {
+    color: green;
+    padding-right: 30px;
+}
+
+.score__lost {
+    color: red;
+}

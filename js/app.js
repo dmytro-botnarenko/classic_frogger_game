@@ -1,3 +1,16 @@
+let lostScore = 0;
+let wonScore = 0;
+const scoreWonText = document.querySelector('.score__won');
+const scoreLostText = document.querySelector('.score__lost');
+
+
+function scoreUpdate(win, lose) {
+    wonScore += win;
+    lostScore += lose;
+    scoreWonText.textContent = `Won: ${wonScore}`;
+    scoreLostText.textContent = `Lost: ${lostScore}`;
+}
+
 // Enemies our player must avoid
 var Enemy = function(x, y, speed) {
     // Variables applied to each of our instances go here,
@@ -35,6 +48,7 @@ Enemy.prototype.update = function(dt) {
         } else {
             player.x = 200;
             player.y = 400;
+            scoreUpdate(0, 1);
             console.log('collision!')
         }
 };
@@ -56,7 +70,6 @@ const Player = function(x, y) {
     // actual player image X/Y-coordinates start (for more precise collision)
     this.topLeftX = 17;
     this.topLeftY = 63;
-    
 }
 
 Player.prototype.update = function() {
@@ -91,17 +104,20 @@ Player.prototype.handleInput = function(keyCode) {
     }
     if (this.y < -19) {
         this.y = 400
+        scoreUpdate(1, 0);
     }
 }
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
-const enemy1 = new Enemy(-90, 60, 10);
-const enemy2 = new Enemy(175, 140, 0);
+const enemy1 = new Enemy(-90, 60, 700);
+const enemy2 = new Enemy(-90, 140, 120);
+const enemy3 = new Enemy(-90, 220, 120);
 const allEnemies = [
     enemy1,
-    enemy2
+    enemy2,
+    enemy3
 ];
 
 const player = new Player(200, 400);
@@ -118,5 +134,3 @@ document.addEventListener('keyup', function(e) {
 
     player.handleInput(allowedKeys[e.keyCode]);
 });
-
-const coord = document.getElementsByClassName('coord');
