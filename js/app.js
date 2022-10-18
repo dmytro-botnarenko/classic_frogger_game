@@ -1,7 +1,21 @@
+// Scoreboard DOM code made in app.js (task requirements, any changes can only be made here)
+const score = document.createElement("p");
+const scoreWonText = document.createElement("span");
+const scoreLostText = document.createElement("span");
+scoreWonText.textContent = "Won: 0";
+scoreLostText.textContent = "Lost: 0";
+score.append(scoreWonText, scoreLostText);
+document.body.appendChild(score);
+score.style.fontFamily =
+  'Impact,Haettenschweiler,"Arial Narrow Bold", sans-serif';
+score.style.fontSize = "24px";
+score.style.marginBottom = "0";
+scoreWonText.style.color = "green";
+scoreWonText.style.paddingRight = "30px";
+scoreLostText.style.color = "red";
+
 let scoreLost = 0;
 let scoreWon = 0;
-const scoreWonText = document.querySelector(".score__won");
-const scoreLostText = document.querySelector(".score__lost");
 
 function scoreUpdate(win, lose) {
   scoreWon += win;
